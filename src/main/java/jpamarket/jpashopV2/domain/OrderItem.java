@@ -18,7 +18,7 @@ public class OrderItem {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "item_id")
-    private Item items;
+    private Item item;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "order_id")
@@ -26,5 +26,21 @@ public class OrderItem {
 
     private int orderPrice;
     private int count;
+
+    // 생성 로직
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    // 취소 로직
+    public void cancel() {
+        getItem().addStock(count);
+    }
 
 }
