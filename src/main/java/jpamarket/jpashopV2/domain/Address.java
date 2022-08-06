@@ -9,8 +9,8 @@ public class Address {
     private String street;
     private String zipcode;
 
-    // Constructor
-    public Address() {
+    // Constructor - 직접 생성 금지
+    protected Address() {
     }
 
     public Address(String city) {

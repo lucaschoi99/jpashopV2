@@ -22,4 +22,12 @@ public class Delivery {
 
     private DeliveryStatus deliveryStatus;
 
+    // Constructor
+    protected Delivery() {
+    }
+
+    public Delivery(Address address) {
+        this.address = address;
+    }
+
 }
