@@ -9,4 +9,12 @@ public class Address {
     private String street;
     private String zipcode;
 
+    // Constructor
+    public Address() {
+    }
+
+    public Address(String city) {
+        this.city = city;
+    }
+
 }
