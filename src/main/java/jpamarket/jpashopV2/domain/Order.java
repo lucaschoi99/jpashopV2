@@ -36,5 +36,43 @@ public class Order {
     private LocalDateTime dateTime;
     private OrderStatus orderStatus;
 
+    // Constructor - 직접 생성 금지
+    protected Order() {
+    }
+
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for (OrderItem orderItem : orderItems) {
+            order.setOrderItem(orderItem);
+        }
+        order.setOrderStatus(OrderStatus.ORDERED);
+        order.setDateTime(LocalDateTime.now());
+
+        return order;
+    }
+
+    // Order-Member 연관 메소드
+    public void setMember(Member member) {
+        this.setMember(member);
+        member.getOrders().add(this);
+    }
+
+    // Order-Delivery 연관 메소드
+    public void setDelivery(Delivery delivery) {
+        this.setDelivery(delivery);
+        delivery.setOrder(this);
+    }
+
+    // Order-OrderItem 연관 메소드
+    public void setOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrders(this);
+    }
+
+
+
+
 
 }
