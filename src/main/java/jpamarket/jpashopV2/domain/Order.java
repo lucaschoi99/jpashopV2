@@ -1,6 +1,6 @@
 package jpamarket.jpashopV2.domain;
 
-임import jpamarket.jpashopV2.domain.status.DeliveryStatus;
+import jpamarket.jpashopV2.domain.status.DeliveryStatus;
 import jpamarket.jpashopV2.domain.status.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -70,13 +70,13 @@ public class Order {
 
     // Order-Member 연관 메소드
     public void setMember(Member member) {
-        this.setMember(member);
+        this.member = member;
         member.getOrders().add(this);
     }
 
     // Order-Delivery 연관 메소드
     public void setDelivery(Delivery delivery) {
-        this.setDelivery(delivery);
+        this.delivery = delivery;
         delivery.setOrder(this);
     }
 
