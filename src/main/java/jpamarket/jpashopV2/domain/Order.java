@@ -1,5 +1,6 @@
 package jpamarket.jpashopV2.domain;
 
+임import jpamarket.jpashopV2.domain.status.DeliveryStatus;
 import jpamarket.jpashopV2.domain.status.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +41,9 @@ public class Order {
     protected Order() {
     }
 
-    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+    //== 비즈니스 로직 ==//
+    // 주문 생성
+    public static Order createOrder(Member member, Delivery delivery, List<OrderItem> orderItems) {
         Order order = new Order();
         order.setMember(member);
         order.setDelivery(delivery);
@@ -52,6 +55,18 @@ public class Order {
 
         return order;
     }
+
+    // 주문 취소
+    public void cancel() {
+        if (delivery.getDeliveryStatus() == DeliveryStatus.OVER) {
+            throw new IllegalStateException("이미 배송완료된 상품입니다.");
+        }
+        this.setOrderStatus(OrderStatus.CANCELED);
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
+
 
     // Order-Member 연관 메소드
     public void setMember(Member member) {
