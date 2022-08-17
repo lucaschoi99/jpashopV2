@@ -49,7 +49,6 @@ class OrderServiceTest {
         Map<Long, Long> items = new HashMap<>();
         items.put(newMovie.getId(), 200L);
         items.put(newBook.getId(), 100L);
-        System.out.println("items = " + items);
         Long orderId = orderService.order(member.getId(), items, address);
 
         // 주문생성 기능 check
@@ -57,6 +56,28 @@ class OrderServiceTest {
         assertThat(findOrder.getOrderStatus()).isEqualTo(OrderStatus.ORDERED);
         assertThat(findOrder.getOrderItems().size()).isEqualTo(2);
         assertThat(findOrder.getDelivery().getDeliveryStatus()).isEqualTo(DeliveryStatus.ON);
+    }
+
+    @Test
+    public void notEnoughStockOrder() {
+        // Member 정보, 배송정보, Item 생성
+        Member member = createMember();
+        em.persist(member);
+        Address address = new Address("Seoul");
+        Movie newMovie = createMovie("movie1", "choi", 1000, 15000);
+        Book newBook = createBook("book2", "bin", "150", 100, 10000);
+        em.persist(newMovie);
+        em.persist(newBook);
+
+        Map<Long, Long> items = new HashMap<>();
+        items.put(newMovie.getId(), 200L);
+        items.put(newBook.getId(), 300L);
+
+        // 재고 부족 Exception check
+        Throwable exception = assertThrows(RuntimeException.class, () -> {
+            orderService.order(member.getId(), items, address);;
+        });
+        assertEquals("재고가 부족합니다.", exception.getMessage());
 
 
     }
