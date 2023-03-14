@@ -1,10 +1,11 @@
 package jpamarket.jpashopV2.repository;
 
+import jakarta.persistence.EntityManager;
 import jpamarket.jpashopV2.domain.items.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
+//import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository

@@ -1,5 +1,6 @@
 package jpamarket.jpashopV2.controller;
 
+import jakarta.validation.Valid;
 import jpamarket.jpashopV2.controller.form.MemberForm;
 import jpamarket.jpashopV2.domain.Address;
 import jpamarket.jpashopV2.domain.Member;
@@ -10,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import javax.validation.Valid;
+
 import java.util.List;
 
 @Controller

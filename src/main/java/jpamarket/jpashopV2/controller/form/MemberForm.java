@@ -1,9 +1,8 @@
 package jpamarket.jpashopV2.controller.form;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.validation.constraints.NotEmpty;
 
 @Getter @Setter
 public class MemberForm {
