@@ -4,9 +4,9 @@ import jpamarket.jpashopV2.domain.items.Item;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
-import static javax.persistence.FetchType.*;
+import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
