@@ -35,7 +35,7 @@ public class MemberService {
     }
 
     // 회원 단건 조회
-    public Member findMember(Long id) {
+    public Member findById(Long id) {
         return memberRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 

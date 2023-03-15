@@ -20,12 +20,12 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
     // Item 저장
-    public void saveItem(Item item) {
+    public void save(Item item) {
         itemRepository.save(item);
     }
 
     // 단건 조회
-    public Item findItem(Long id) {
+    public Item findById(Long id) {
         return itemRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
