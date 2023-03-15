@@ -18,7 +18,8 @@ public class MemberService {
     // 회원가입
     public Long join(Member member) {
         checkDuplicateMember(member);
-        return memberRepository.save(member);
+        Member saved = memberRepository.save(member);
+        return saved.getId();
     }
 
     private void checkDuplicateMember(Member member) {
@@ -35,7 +36,7 @@ public class MemberService {
 
     // 회원 단건 조회
     public Member findMember(Long id) {
-        return memberRepository.findMember(id);
+        return memberRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
 

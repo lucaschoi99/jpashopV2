@@ -27,7 +27,8 @@ public class OrderService {
     // 주문
     public Long order(Long memberId, Map<Long, Long> infos, Address address) {
         // 주문자 정보
-        Member findMember = memberRepository.findMember(memberId);
+        Member findMember = memberRepository.findById(memberId)
+                .orElseThrow(IllegalAccessError::new);
 
         // 배송 정보
         Delivery delivery = new Delivery(address);
@@ -38,7 +39,7 @@ public class OrderService {
         Set<Long> keySets = infos.keySet();
         for (Long itemId : keySets) {
             Long count = infos.get(itemId);
-            Item findItem = itemRepository.findItem(itemId);
+            Item findItem = itemRepository.findById(itemId).orElseThrow(IllegalAccessError::new);
 
             OrderItem orderItem = OrderItem.createOrderItem(findItem, findItem.getPrice(), count.intValue());
             orderItemList.add(orderItem);
@@ -48,13 +49,14 @@ public class OrderService {
         Order order = Order.createOrder(findMember, delivery, orderItemList);
 
         // Order 저장
-        return orderRepository.save(order);
+        Order saved = orderRepository.save(order);
+        return saved.getId();
     }
 
 
     // 주문 취소
     public void cancelOrder(Long orderId) {
-        Order findOrder = orderRepository.findOrderById(orderId);
+        Order findOrder = orderRepository.findById(orderId).orElseThrow(IllegalAccessError::new);
         findOrder.cancel();
     }
 

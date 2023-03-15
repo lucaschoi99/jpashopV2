@@ -26,7 +26,7 @@ public class ItemService {
 
     // 단건 조회
     public Item findItem(Long id) {
-        return itemRepository.findItem(id);
+        return itemRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
     // 전체 조회
