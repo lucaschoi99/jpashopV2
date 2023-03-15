@@ -1,5 +1,6 @@
 package jpamarket.jpashopV2.controller.form;
 
+import jpamarket.jpashopV2.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ public class ItemForm {
 
     // 기본 요소
     private Long id;
+    private Category category;
     private String name;
     private int price;
     private int amount;
