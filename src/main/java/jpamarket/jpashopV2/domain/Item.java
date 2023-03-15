@@ -1,30 +1,36 @@
-package jpamarket.jpashopV2.domain.items;
+package jpamarket.jpashopV2.domain;
 
-import jpamarket.jpashopV2.domain.ItemCategory;
+import jpamarket.jpashopV2.domain.Category;
 import jpamarket.jpashopV2.domain.exceptions.NotEnoughStockException;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
-public abstract class Item {
+@Builder
+public class Item {
 
     @Id @GeneratedValue
     @Column(name = "item_id")
     private Long id;
 
+    // 공통 속성
+    private Category category;
     private String name;
     private int price;
     private int amount;
 
-    @OneToMany(mappedBy = "item")
-    private List<ItemCategory> categories = new ArrayList<>();
+    // Album
+    private String artist;
+    // Book
+    private String author;
+    private String isbn;
+    // Movie
+    private String director;
+    private String actor;
 
     // 재고 관리 메소드
     public void removeStock(int count) {
