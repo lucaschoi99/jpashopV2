@@ -10,15 +10,13 @@ import jpamarket.jpashopV2.domain.status.OrderStatus;
 import jpamarket.jpashopV2.repository.ItemRepository;
 import jpamarket.jpashopV2.repository.MemberRepository;
 import jpamarket.jpashopV2.repository.OrderRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +50,7 @@ class OrderServiceTest {
         Long orderId = orderService.order(member.getId(), items, address);
 
         // 주문생성 기능 check
-        Order findOrder = orderRepository.findOrderById(orderId);
+        Order findOrder = orderRepository.findById(orderId).orElseThrow(IllegalAccessError::new);
         assertThat(findOrder.getOrderStatus()).isEqualTo(OrderStatus.ORDERED);
         assertThat(findOrder.getOrderItems().size()).isEqualTo(2);
         assertThat(findOrder.getDelivery().getDeliveryStatus()).isEqualTo(DeliveryStatus.ON);
@@ -100,7 +98,7 @@ class OrderServiceTest {
 
         // 주문 취소 확인
         orderService.cancelOrder(orderId);
-        Order findOrderById = orderRepository.findOrderById(orderId);
+        Order findOrderById = orderRepository.findById(orderId).orElseThrow(IllegalAccessError::new);
         assertThat(findOrderById.getOrderStatus()).isEqualTo(OrderStatus.CANCELED);
 
     }
