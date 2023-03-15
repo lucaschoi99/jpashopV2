@@ -1,6 +1,5 @@
 package jpamarket.jpashopV2.domain;
 
-import jpamarket.jpashopV2.domain.items.Item;
 import lombok.Getter;
 import lombok.Setter;
 

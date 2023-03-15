@@ -1,7 +1,7 @@
 package jpamarket.jpashopV2.service;
 
 import jpamarket.jpashopV2.domain.*;
-import jpamarket.jpashopV2.domain.items.Item;
+import jpamarket.jpashopV2.domain.Item;
 import jpamarket.jpashopV2.domain.status.DeliveryStatus;
 import jpamarket.jpashopV2.repository.ItemRepository;
 import jpamarket.jpashopV2.repository.MemberRepository;

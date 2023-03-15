@@ -1,6 +1,6 @@
 package jpamarket.jpashopV2.service;
 
-import jpamarket.jpashopV2.domain.items.Item;
+import jpamarket.jpashopV2.domain.Item;
 import jpamarket.jpashopV2.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
     // Item 저장
-    public void save(Item item) {
+    public void saveItem(Item item) {
         itemRepository.save(item);
     }
 
